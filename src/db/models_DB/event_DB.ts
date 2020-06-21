@@ -7,7 +7,7 @@ export interface Event_DB extends mongoose.Document {
      prices: object;
      artist: object;
      image: string;
-     desc:string;
+     description:string;
 }
 
   const eventSchema:Schema = new mongoose.Schema({
@@ -64,7 +64,7 @@ export interface Event_DB extends mongoose.Document {
         lowercase:true,
         required:true
     },
-    desc:{
+    description:{
         type:String,
         required:true
     }
