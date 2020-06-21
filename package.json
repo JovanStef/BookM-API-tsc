@@ -1,0 +1,31 @@
+{
+  "name": "BookM-API",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node ./src/server/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodemon": "nodemon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/express": "^4.17.6",
+    "@types/mongoose": "^5.7.24",
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.19",
+    "random-date-generator": "^1.0.2",
+    "typescript": "^3.9.5",
+    "world-countries-capitals": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2"
+  }
+}
