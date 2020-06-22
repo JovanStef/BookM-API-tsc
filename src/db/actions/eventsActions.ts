@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import {Helper} from '../../common/helpers';
 import EventDB, { Event_DB } from "../../db/models_DB/event_DB";
 import {Artist} from "../../Models/artist";
 import { EventM } from "../../Models/event";
@@ -6,13 +7,17 @@ import { EventM } from "../../Models/event";
 
 export class EventsController{
     constructor(){
-
+        
     }
 
     public async getAllEventsDB(req:Request,res:Response){
                 let events:EventM[]=[]
+                req.query.limit == undefined ? req.query.limit='6' : req.query.limit;
+                req.query.skip == undefined ? req.query.skip='0' : req.query.skip;
+
                 let limit:string | any = req.query.limit;
                 let skip:string | any = req.query.skip;
+
             try{
                 const tempEvents:Event_DB[] | any[] = await EventDB.find({})
                 .skip(parseInt(skip))
@@ -28,7 +33,7 @@ export class EventsController{
             }catch(err){
                 res.status(500).send(err)
             }
-    }
+    };
 
     public async addNewEventDB(req:Request,res:Response){
         let newEvent:Event_DB = req.body;
@@ -42,14 +47,25 @@ export class EventsController{
             }
         }catch(err){
             res.status(500).send(err)
-
         }
-    }
+    };
 
     public async removeEventDB(req:Request,res:Response){
         try{
            await EventDB.findOneAndRemove({name:req.body.name});
            res.status(200).send({"message":"Event removed"})
+        }catch(err){
+            res.status(500).send(err.message)
+        }
+    };
+
+
+
+    public async searchEventDB(req:Request,res:Response){
+        const helper:Helper = new Helper
+        let searchQ:object|any = helper.resolveReqBody(req.body)
+        try{
+            res.status(200).send(searchQ)
         }catch(err){
             res.status(500).send(err.message)
         }

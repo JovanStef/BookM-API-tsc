@@ -45,4 +45,26 @@ export class Helper {
         }
         return this.prices
     }
+
+    public resolveReqBody(obj:object | any):object{
+        let searchQ:string | number;
+        console.log(Object.values(obj))
+        switch(Object.keys(obj)[0]){
+            case('name'):
+            searchQ = obj.name;
+            break;
+            case('location'):
+            searchQ = obj.location;
+            break;
+            case('date'):
+            searchQ = obj.date;
+            break;
+            case('price'):
+            searchQ = obj.price;
+            break;
+            default:
+                return {"message":"Search by name,location,date or price"}
+        }
+        return {key:Object.keys(obj)[0] , value:searchQ}
+    }
 }

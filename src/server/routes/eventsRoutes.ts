@@ -8,6 +8,7 @@ const route = 'events';
 
 
 events.get(`/${route}`,evCtrl.getAllEventsDB);
+events.get(`/${route}/search`,evCtrl.searchEventDB)
 events.post(`/${route}`,evCtrl.addNewEventDB);
 events.delete(`/${route}`,evCtrl.removeEventDB);
 
