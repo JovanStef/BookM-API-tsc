@@ -48,7 +48,6 @@ export class Helper {
 
     public resolveReqBody(obj:object | any):object{
         let searchQ:string | number;
-        console.log(Object.values(obj))
         switch(Object.keys(obj)[0]){
             case('name'):
             searchQ = obj.name;
