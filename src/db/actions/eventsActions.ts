@@ -83,14 +83,16 @@ export class EventsController {
                     break;
                 case ('date'):
                     let date = new Date(searchQ.value).toString();
-                    console.log(date)
                     events = await EventDB.find({date:{$gte:date }})
                     break;
                 default:
                     events = await EventDB.find({ [searchQ.key]: searchQ.value });
             }
-
-            events.length > 0 ? res.status(200).send(events) : res.status(400).send({ "message": "No such events" })
+            let data:EventM[]=[]; 
+            events.forEach((elem:Event_DB | any)=>{
+                data.push(new EventM(elem.id,elem.name,elem.date,elem.prices,elem.artist,elem.location,elem.image,elem.description));
+            })
+            data.length > 0 ? res.status(200).send(data) : res.status(400).send({ "message": "No such events" })
         } catch (err) {
             res.status(500).send(err.message)
         }
