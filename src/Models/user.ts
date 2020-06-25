@@ -9,6 +9,7 @@ export interface Email {
 export interface Password {
   passValidator: (pass: string) => boolean;
   passHash: (pass: string) => boolean;
+  passHashCompare: (bodyPass: string, DBPass: string) => boolean;
 }
 
 export interface Jwt {
@@ -76,8 +77,13 @@ export class User implements Email, Password, Jwt {
   //INTERFACE METHODS
 
   //email
-  public emailValidator(email: string): boolean {
-    return true;
+  public emailValidator(): boolean {
+    const validEmail = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    if (!validEmail.test(this.email)) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   //password
@@ -86,6 +92,10 @@ export class User implements Email, Password, Jwt {
   }
 
   public passValidator(pass: string): boolean {
+    return true;
+  }
+
+  public passHashCompare(bodyPass: string, DBPass: string): boolean {
     return true;
   }
 
